@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:untitled7/Style/Style.dart';
-
 import '../Rest Api/RestClient.dart';
-// আপনার এপিআই রিকোয়েস্ট ফাইলটি এখানে ইমপোর্ট করে নেবেন (যদি আলাদা ফাইলে থাকে)
-// import 'path_to_your_api_file.dart';
 
 class ProductCreateScreen extends StatefulWidget {
   const ProductCreateScreen({super.key});
@@ -77,11 +74,9 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
         children: [
           SrceenBackground(context),
           Container(
-            child: Loading?(Center(child: CircularProgressIndicator(),)):
+            child: Loading?(const Center(child: CircularProgressIndicator(),)):
             SingleChildScrollView(
               padding: const EdgeInsets.all(20),
-
-
               child: Column(
                 children: [
                   TextFormField(
@@ -126,7 +121,7 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
 
                   DropdownButtonFormField<String>(
                     decoration: AppInputDecoration('Select Qt'),
-                    value: selectedQt.isEmpty ? "" : selectedQt,
+                    value: selectedQt.isEmpty ? null : selectedQt,
                     isExpanded: true,
                     items: const [
                       DropdownMenuItem(
