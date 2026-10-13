@@ -6,8 +6,7 @@ class ProductCreateScreen extends StatefulWidget {
   const ProductCreateScreen({super.key});
 
   @override
-  State<ProductCreateScreen> createState() =>
-      _ProductCreateScreenState();
+  State<ProductCreateScreen> createState() => _ProductCreateScreenState();
 }
 
 class _ProductCreateScreenState extends State<ProductCreateScreen> {
@@ -22,7 +21,7 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
     "UnitPrice": ""
   };
 
-  bool Loading=false;
+  bool Loading = false;
 
   InputOnChange(key, Textvalue) {
     setState(() {
@@ -33,37 +32,33 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
   FormOnSubmit() async {
     if (FormValues['ProductName']!.isEmpty) {
       ErrorToast('Product Name Required !');
-    }
-    else if (FormValues['ProductCode']!.isEmpty) {
+    } else if (FormValues['ProductCode']!.isEmpty) {
       ErrorToast('Product Code Required !');
-    }
-    else if (FormValues['Img']!.isEmpty) {
+    } else if (FormValues['Img']!.isEmpty) {
       ErrorToast('Image Link Required !');
-    }
-    else if (FormValues['UnitPrice']!.isEmpty) {
+    } else if (FormValues['UnitPrice']!.isEmpty) {
       ErrorToast('Unit Price Required !');
-    }
-    else if (FormValues['TotalPrice']!.isEmpty) {
+    } else if (FormValues['TotalPrice']!.isEmpty) {
       ErrorToast('Total Price Required !');
-    }
-    else if (FormValues['Qty']!.isEmpty) {
+    } else if (FormValues['Qty']!.isEmpty) {
       ErrorToast('Qty Required !');
-    }
-    else {
-      // Opening Load
+    } else {
       setState(() {
         Loading = true;
       });
 
-      // Wait for API
       await ProdductCreateRequest(FormValues);
 
-      // Srceen of Refresh
       setState(() {
         Loading = false;
       });
+
+      if (mounted) {
+        Navigator.pop(context, true);
+      }
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,8 +69,9 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
         children: [
           SrceenBackground(context),
           Container(
-            child: Loading?(const Center(child: CircularProgressIndicator(),)):
-            SingleChildScrollView(
+            child: Loading
+                ? const Center(child: CircularProgressIndicator())
+                : SingleChildScrollView(
               padding: const EdgeInsets.all(20),
               child: Column(
                 children: [
@@ -86,7 +82,6 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
                     },
                   ),
                   const SizedBox(height: 20),
-
                   TextFormField(
                     decoration: AppInputDecoration('Product Code'),
                     onChanged: (Textvalue) {
@@ -94,7 +89,6 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
                     },
                   ),
                   const SizedBox(height: 20),
-
                   TextFormField(
                     decoration: AppInputDecoration('Product Image'),
                     onChanged: (Textvalue) {
@@ -102,7 +96,6 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
                     },
                   ),
                   const SizedBox(height: 20),
-
                   TextFormField(
                     decoration: AppInputDecoration('Unit Price'),
                     onChanged: (Textvalue) {
@@ -110,7 +103,6 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
                     },
                   ),
                   const SizedBox(height: 20),
-
                   TextFormField(
                     decoration: AppInputDecoration('Total Price'),
                     onChanged: (Textvalue) {
@@ -118,10 +110,9 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
                     },
                   ),
                   const SizedBox(height: 20),
-
                   DropdownButtonFormField<String>(
                     decoration: AppInputDecoration('Select Qt'),
-                    value: selectedQt.isEmpty ? null : selectedQt,
+                    initialValue: selectedQt.isEmpty ? null : selectedQt,
                     isExpanded: true,
                     items: const [
                       DropdownMenuItem(
@@ -140,9 +131,7 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
                     },
                     iconEnabledColor: Colors.black,
                   ),
-
                   const SizedBox(height: 20),
-
                   SizedBox(
                     width: double.infinity,
                     height: 50,

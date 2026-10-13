@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:untitled7/Screen/ProductGridviewScreen.dart';
-
-import 'Srceen/ProductGridviewScreen.dart';
+import 'package:untitled7/Scrceen/ProductGridviewScreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter CRUD APP',
-      home: const ProductGridViewScreen(),
+      home: const ProductGridviewScreen(),
     );
   }
 }
